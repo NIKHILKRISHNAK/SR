@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: black;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1,
+        h3 {
+            color: #fff;
+        }
+
+        .back {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .edit {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .backer {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .center {
+            width: 80%;
+            margin-bottom: 30px;
+            padding: 20px;
+            line-height: 30px;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        @media only screen and (max-width:480px) {
+            .center {
+                height: 50%;
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                line-height: 45px;
+            }
+            .edit{
+                margin-right:20px;
+            }
+            .back{
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="center">
+            <img src="/static/profile.png" alt="">
+            <div class="texts">
+                <h1>Name: {{ppl.name}}</h1>
+                <h3> Age: {{ppl.age}}</h3>
+                <h3> Son/Daughter of: {{ppl.father_name}}</h3>
+                <h3> Item: {{ppl.item}}</h3>
+                <h3> Category: {{ppl.category}}</h3>
+                <h3> Status: {{ppl.status}}</h3>
+            </div>
+        </div>
+        <div class="backer">
+            <button class="back" onclick="history.back()">&#8592; Back</button>
+            <a href="/edit/{{ppl.id}}/"><button class="edit">Edit &#8594;</button></a>
+        </div>
+    </div>
+</body>
+
+</html>

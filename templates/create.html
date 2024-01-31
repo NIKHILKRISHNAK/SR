@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #000;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        label {
+            color: #fff;
+        }
+
+        form {
+            margin-top:30px;
+            width: 30%;
+            padding: 20px;
+        }
+
+        .inputs {
+            display: flex;
+            justify-content: space-between;
+            text-align: left;
+        }
+
+        input,
+        select {
+            width: 60%;
+            height: 30px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+        }
+
+        .submit {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        input[type="submit"] {
+            width: 40%;
+            cursor: pointer;
+            background-color: rgb(0, 185, 40);
+
+        }
+
+        .back {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            margin-left:10px;
+        }
+
+        .backer {
+            text-align: left;
+            width: 100%;
+        }
+        @media only screen and (max-width:480px){
+            form{
+                width:80%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        
+        <h1>Add Participant</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="inputs"> <label>Name</label>
+                {{form.name}}</div> <br>
+            <div class="inputs"> <label>Age</label>
+                {{form.age}} </div> <br>
+            <div class="inputs">
+                <label>Name of father</label>
+                {{form.father_name}}
+            </div> <br>
+            <div class="inputs">
+                <label>Item</label>
+                {{form.item}}
+            </div> <br>
+            <div class="inputs">
+                <label>Category</label>
+                {{form.category}}
+            </div> <br>
+            <div class="inputs">
+                <label>Status</label>
+                {{form.status}}
+            </div> <br>
+            <div class="submit">
+                <input type="submit" value="Save">
+            </div>
+        </form>
+        {{message}}
+        <div class="backer">
+            <button class="back" onclick="history.back()">&#8592;Back</button>
+        </div>
+</body>
+</div>
+
+</html>

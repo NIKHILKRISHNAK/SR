@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Items</title>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 3px solid #fff;
+      text-align: left;
+      padding: 8px;
+
+    }
+
+    th {
+      background-color: rgb(186, 208, 248);
+      border-radius: 5px 5px 0px 0p;
+    }
+
+    td {
+      background-color: rgb(207, 223, 252);
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    a:hover {
+      color: rgb(0, 39, 124);
+    }
+
+    .heading {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    button {
+      background-color: rgb(207, 223, 252);
+      border: none;
+      padding: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 10px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      ;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 30%;
+    }
+
+    body {
+      background-color: black;
+    }
+
+    h1,
+    p {
+      color: white;
+    }
+
+    @media only screen and (max-width:480px) {
+      button {
+        height: 25px;
+        padding: 2px;
+        font-size: 11px;
+      }
+
+      .buttons {
+        width: 60%;
+      }
+    }
+
+    body {
+      counter-reset: Serial;
+    }
+
+    tr td:first-child:before {
+      counter-increment: Serial;
+      content: counter(Serial);
+    }
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="heading">
+    <h1>Group Items</h1>
+    <div class="buttons">
+      <a href="/allitems"><Button>All Items</Button></a>
+      <a href="/singleitems"><Button>Single Items</Button></a>
+      <a href="/create"><Button>Add Participant</Button></a>
+    </div>
+  </div>
+  <div style="display: flex;flex-direction: row;justify-content: space-between;">
+  <a href="/completed"><p>{{completed_count}}/{{total_count}} Completed</p></a>
+  <a href="/remaining"><p>Remaining</p></a>
+  </div>
+  <table>
+    <tr>
+      <th style="width: 5%;">Sl.No</th>
+      <th>Name</th>
+      <th>Item</th>
+      <th>Age</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+    {% for people in ppl %}
+    <tr>
+      <td></td>
+      <td><a href="/allitems/{{people.id}}/">{{people}} S(D)/O {{people.father_name}}</a></td>
+      {% if people.category == "Group" %}
+      <td>{{people.item}} (G)</td>
+      {% else %}
+      <td>{{people.item}}</td>
+      {% endif %}
+      <td>{{people.age}}</td>
+      {% if people.status == "Cancelled" %}
+      <td style="background: #DC3545; color: white;">{{people.status}}</td>
+      {% elif people.status == "Finished" %}
+      <td style="background-color: #28A745;color: #fff;">{{people.status}}</td>
+      {% else %}
+      <td>{{people.status}}</td>
+      {% endif %}
+      <td><a id="delete" href="/delete/{{people.id}}">Delete</a></td>
+    </tr>
+    {% endfor %}
+
+  </table>
+
+  <script>
+    document.getElementById('delete').addEventListener('click', function (event) {
+      event.preventDefault();
+      var isConfirmed = confirm('Are you sure to delete ?');
+      if (isConfirmed) {
+        window.location.href = event.target.href;
+      } else {
+        console.log('Deletion cancelled');
+      }
+    });
+  </script>
+</body>
+
+</html>
