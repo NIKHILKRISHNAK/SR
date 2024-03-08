@@ -10,6 +10,9 @@ class People(models.Model):
         ('Skit', 'Skit'),
         ('Mimicry', 'Mimicry'),
         ('Mono Act', 'Mono Act'),
+        ('Thiruvathira','Thiruvathira'),
+        ('Kaikottikkali','Kaikottikkali'),
+        ('Magic','Magic'),
     ]
     item = models.CharField(max_length=50, choices=MY_CHOICES)
     ctgry = [

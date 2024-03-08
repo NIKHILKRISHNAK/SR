@@ -101,6 +101,23 @@
       border: 1px solid black;
       border-collapse: collapse;
     }
+    .delete:hover{
+      color:red;
+    }
+    #print_container{
+      display: none;
+    }
+    @media print{
+      #print_container{
+        display: block;
+      }
+      body > *:not(#print_container){
+        display: none;
+      }
+      .not_in_print{
+        display: none !important;
+      }
+    }
   </style>
 </head>
 
@@ -113,12 +130,14 @@
       <a href="/create"><Button>Add Participant</Button></a>
     </div>
   </div>
-  <div style="display: flex;flex-direction: row;justify-content: space-between;">
+  <div style="display: flex;flex-direction: row;justify-content: space-between;" class="not_in_print">
     <a href="/completed">
       <p>{{completed_count}}/{{total_count}} Completed</p>
     </a>
    <a href="/remaining"> <p>Remaining</p></a>
   </div>
+  <button onclick="printScreen()" style="height: fit-content;padding: 10px;">Print</button>
+  <br> <br>
   <table>
     <tr>
       <th style="width: 5%;">Sl.No</th>
@@ -145,7 +164,29 @@
       {% else %}
       <td>{{people.status}}</td>
       {% endif %}
-      <td><a id="delete" href="/delete/{{people.id}}">Delete</a></td>
+      <td><a id="delete" href="/delete/{{people.id}}" class="delete">Delete</a></td>
+    </tr>
+    {% endfor %}
+
+  </table>
+  
+  <table id="print_container">
+    <tr>
+      <th style="width: 5%;">Sl.No</th>
+      <th>Name</th>
+      <th>Item</th>
+      <th>Age</th>
+    </tr>
+    {% for people in ppl %}
+    <tr>
+      <td></td>
+      <td><a href="/allitems/{{people.id}}/">{{people}} S(D)/O {{people.father_name}}</a></td>
+      {% if people.category == "Group" %}
+      <td>{{people.item}} (G)</td>
+      {% else %}
+      <td>{{people.item}}</td>
+      {% endif %}
+      <td>{{people.age}}</td>
     </tr>
     {% endfor %}
 
@@ -160,6 +201,9 @@
         console.log('Deletion cancelled');
       }
     });
+    function printScreen(){
+      window.print()
+    }
   </script>
 </body>
 

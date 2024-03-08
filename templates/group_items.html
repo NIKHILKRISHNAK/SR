@@ -100,6 +100,9 @@
       border: 1px solid black;
       border-collapse: collapse;
     }
+    .delete:hover{
+      color:red;
+    }
   </style>
 </head>
 
@@ -143,7 +146,7 @@
       {% else %}
       <td>{{people.status}}</td>
       {% endif %}
-      <td><a id="delete" href="/delete/{{people.id}}">Delete</a></td>
+      <td><a id="delete" href="/delete/{{people.id}}" class="delete">Delete</a></td>
     </tr>
     {% endfor %}
 

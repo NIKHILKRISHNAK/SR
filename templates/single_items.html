@@ -101,6 +101,9 @@
       counter-increment: Serial;
       content: counter(Serial);
     }
+    .delete:hover{
+      color:red;
+    }
   </style>
 </head>
 
@@ -146,7 +149,7 @@
       {% else %}
       <td>{{people.status}}</td>
       {% endif %}
-      <td><a id="delete" href="/delete/{{people.id}}">Delete</a></td>
+      <td><a id="delete" href="/delete/{{people.id}}" class="delete">Delete</a></td>
     </tr>
     {% endfor %}
 
